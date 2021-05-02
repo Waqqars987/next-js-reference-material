@@ -1,10 +1,9 @@
 import { MongoClient } from 'mongodb';
 
 export async function connectDatabase() {
-	const client = await MongoClient.connect(
-		'mongodb+srv://graphqluser:graphqluser@learningcluster-lo905.mongodb.net/events?retryWrites=true&w=majority',
-		{ useUnifiedTopology: true }
-	);
+	const client = await MongoClient.connect(process.env.CONNECTION_STRING, {
+		useUnifiedTopology: true,
+	});
 	return client;
 }
 
