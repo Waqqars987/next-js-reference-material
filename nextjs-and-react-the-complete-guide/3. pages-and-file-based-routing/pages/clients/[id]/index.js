@@ -13,7 +13,7 @@ function ClientProjectsPage() {
 		// Alternative
 		router.push({
 			pathname: '/clients/[id]/[clientprojectid]',
-			query: { id: router.query.id, clientprojectid: 'projecta' },
+			query: { id: router.query.id, clientprojectid: 'projecta' }
 		});
 	}
 
@@ -21,6 +21,7 @@ function ClientProjectsPage() {
 		<div>
 			<h1>The Projects of a Given Client</h1>
 			<button onClick={loadProjectHandler}>Load Project A</button>
+			<pre>{JSON.stringify(router.query, null, 4)}</pre>
 		</div>
 	);
 }

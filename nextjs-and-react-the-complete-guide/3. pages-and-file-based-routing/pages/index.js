@@ -8,6 +8,7 @@ function HomePage() {
 				<li>
 					{/* "replace" will replace the current page on the page stack,
 					so we cant go back */}
+					{/* Link component can prefetch page data as soon as we hover on it */}
 					<Link href='/portfolio' replace>
 						Portfolio
 					</Link>

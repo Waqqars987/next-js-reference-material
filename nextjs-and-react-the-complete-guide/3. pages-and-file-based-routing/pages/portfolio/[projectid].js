@@ -12,6 +12,8 @@ function PortfolioProjectPage() {
 	return (
 		<div>
 			<h1>The Portfolio Project Page</h1>
+			<h2>Router object:</h2>
+			<pre>{JSON.stringify(router, null, 4)}</pre>
 		</div>
 	);
 }
