@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
-import { getEventById } from '../../dummy-data';
-import EventSummary from '../../components/event-detail/event-summary';
-import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
-import ErrorAlert from '../../components/ui/error-alert';
+import EventLogistics from '../../components/event-detail/event-logistics';
+import EventSummary from '../../components/event-detail/event-summary';
 import Button from '../../components/ui/button';
+import ErrorAlert from '../../components/ui/error-alert';
+import { getEventById } from '../../dummy-data';
 
 function EventDetailPage() {
 	const router = useRouter();
@@ -24,6 +24,7 @@ function EventDetailPage() {
 			</>
 		);
 	}
+
 	return (
 		<>
 			<EventSummary title={event.title} />
