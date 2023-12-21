@@ -3,15 +3,15 @@ function UserIdPage(props) {
 }
 
 // Using for dynamic segment
-// Since we need to use static pre-generation here, we dont need to use getStaticPaths here
+// Since we don't need to use static pre-generation here, we don't need to use getStaticPaths here
 export async function getServerSideProps(context) {
 	const { params } = context;
 	const userId = params.uid;
 
 	return {
 		props: {
-			id: `user-id: ${userId}`,
-		},
+			id: `user-id: ${userId}`
+		}
 	};
 }
 
