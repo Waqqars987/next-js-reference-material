@@ -7,13 +7,16 @@ import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button';
 import ErrorAlert from '../../components/ui/error-alert';
 
+const fetcher = (...args) => fetch(...args).then(res => res.json());
+
 function FilteredEventsPage() {
 	const [loadedEvents, setLoadedEvents] = useState();
 	const router = useRouter();
 	const filterData = router.query.slug;
 
-	const { data, error } = useSWR(
-		'https://nextjs-course-77559-default-rtdb.firebaseio.com/events.json'
+	const { data, error, isLoading } = useSWR(
+		'https://nextjs-course-77559-default-rtdb.firebaseio.com/events.json',
+		fetcher
 	);
 
 	useEffect(() => {
@@ -23,7 +26,7 @@ function FilteredEventsPage() {
 				if (data.hasOwnProperty(key)) {
 					events.push({
 						id: key,
-						...data[key],
+						...data[key]
 					});
 				}
 			}
@@ -31,7 +34,7 @@ function FilteredEventsPage() {
 		}
 	}, [data]);
 
-	if (!loadedEvents) {
+	if (isLoading || !loadedEvents) {
 		return <p className='center'>Loading...</p>;
 	}
 

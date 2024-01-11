@@ -36,7 +36,7 @@ export async function getStaticPaths() {
 
 	return {
 		paths,
-		fallback: 'blocking',
+		fallback: 'blocking' // blocking - next.js will not serve anything until it's done generating the required page
 	};
 }
 
@@ -46,9 +46,9 @@ export async function getStaticProps(context) {
 
 	return {
 		props: {
-			selectedEvent: event,
+			selectedEvent: event
 		},
-		revalidate: 30,
+		revalidate: 30
 	};
 }
 
