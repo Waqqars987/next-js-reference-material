@@ -13,11 +13,11 @@ function HomePage() {
 			method: 'POST',
 			body: JSON.stringify({ email: enteredEmail, text: enteredFeedback }),
 			headers: {
-				'Content-Type': 'application/json',
-			},
+				'Content-Type': 'application/json'
+			}
 		})
 			.then(response => response.json())
-			.then(data => console.log(data));
+			.then(() => alert('Feedback received!'));
 	};
 
 	const loadFeedbackHandler = () => {
