@@ -5,7 +5,7 @@ import '../styles/globals.css';
 
 // This is the root app component which is rendered for every page that is being displayed
 // Component prop is set by Next.js
-// Next.js automcatically merges all Head sections
+// Next.js automatically merges all Head sections
 // To solve conflicts, the later element wins
 
 function MyApp({ Component, pageProps }) {
