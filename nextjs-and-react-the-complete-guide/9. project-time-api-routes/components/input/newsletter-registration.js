@@ -12,11 +12,11 @@ function NewsletterRegistration() {
 			method: 'POST',
 			body: JSON.stringify({ email: enteredEmail }),
 			headers: {
-				'Content-Type': 'application/json',
-			},
+				'Content-Type': 'application/json'
+			}
 		})
 			.then(response => response.json())
-			.then(data => console.log(data));
+			.then(() => alert('Successfully Registered!'));
 	}
 
 	return (
