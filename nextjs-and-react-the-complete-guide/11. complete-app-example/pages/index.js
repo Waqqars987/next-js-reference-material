@@ -1,48 +1,29 @@
+import Head from 'next/head';
+
 import Hero from '../components/home-page/hero';
+import { getFeaturedPosts } from '../lib/posts-util';
 import FeaturedPosts from '../components/home-page/featured-posts';
 
-const DUMMY_POSTS = [
-	{
-		slug: 'getting-started-with-nextjs',
-		title: 'Getting Started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt:
-			'NextJS is a React fraework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-		date: '2022-02-10'
-	},
-	{
-		slug: 'getting-started-with-nextjs2',
-		title: 'Getting Started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt:
-			'NextJS is a React fraework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-		date: '2022-02-10'
-	},
-	{
-		slug: 'getting-started-with-nextjs3',
-		title: 'Getting Started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt:
-			'NextJS is a React fraework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-		date: '2022-02-10'
-	},
-	{
-		slug: 'getting-started-with-nextjs4',
-		title: 'Getting Started with NextJS',
-		image: 'getting-started-nextjs.png',
-		excerpt:
-			'NextJS is a React fraework for production - it makes building fullstack React apps and sites a breeze and ships with built-in SSR.',
-		date: '2022-02-10'
-	}
-];
-
-function HomePage() {
+function HomePage({ posts }) {
 	return (
 		<>
+			<Head>
+				<title>Waqqar's Blog</title>
+				<meta name='decsription' content='I post about porgramming and web development.' />
+			</Head>
 			<Hero />
-			<FeaturedPosts posts={DUMMY_POSTS} />
+			<FeaturedPosts posts={posts} />
 		</>
 	);
+}
+
+export function getStaticProps() {
+	const featuredPosts = getFeaturedPosts();
+
+	return {
+		props: { posts: featuredPosts }
+		// revalidate: 1800
+	};
 }
 
 export default HomePage;
