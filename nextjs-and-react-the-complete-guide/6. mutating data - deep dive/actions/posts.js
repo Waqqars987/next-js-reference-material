@@ -1,11 +1,13 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { storePost } from '@/lib/posts';
+import { uploadImage } from '@/lib/cloudinary';
+import { storePost, updatePostLikeStatus } from '@/lib/posts';
 
 // Server actions must be 'async'
-export async function createPost(prevState, formData) {
+export async function createPost(_prevState, formData) {
 	const title = formData.get('title');
 	const image = formData.get('image');
 	const content = formData.get('content');
@@ -27,12 +29,26 @@ export async function createPost(prevState, formData) {
 		return { errors };
 	}
 
+	let imageUrl;
+	try {
+		imageUrl = await uploadImage(image);
+	} catch (error) {
+		throw new Error('Image Upload failed, post was not created. Please try again later.');
+	}
+
 	await storePost({
-		imageUrl: '',
+		imageUrl,
 		title,
 		content,
 		userId: 1
 	});
 
+	revalidatePath('/', 'layout');
 	redirect('/feed');
+}
+
+export async function togglePostLikeStatus(postId, _formData) {
+	await updatePostLikeStatus(postId, 2);
+	// revalidatePath('/feed');	// revalidate only feed page path
+	revalidatePath('/', 'layout'); // revalidate all pages of the app that are wrapped with Root layout
 }
